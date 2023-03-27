@@ -32,7 +32,7 @@ const Cell = ({value, block, elementId} : {value: number|null, block: number, el
     <input
       className="bg-transparent cursor-pointer caret-transparent focus:bg-teal-100 outline-none border border-teal-900/10 text-center w-20 h-20 text-5xl disabled:cursor-not-allowed"
       type="number"
-      value={value?? board[block][elementId] ?? ""}
+      value={value?? board[block][elementId] || undefined}
       disabled={!!value}
       onChange={saveValue}
       onKeyPress={sanitizeInput}
@@ -158,7 +158,7 @@ export default function Home() {
     <SudokuContext.Provider value={[board, setBoard]}>
 
     <main className="min-h-screen flex flex-col space-y-10 items-center justify-center bg-slate-200">
-      <div className="flex flex-col space-y-5 w-full">
+      <div className="flex flex-col space-y-5 w-full items-center">
         <div className="flex justify-evenly">
           <button
             onClick={resetBoard}
