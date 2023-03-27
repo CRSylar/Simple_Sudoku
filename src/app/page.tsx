@@ -1,5 +1,5 @@
 "use client";
-import useSWR                                             from 'swr';
+import useSWR, { Fetcher }                                from 'swr';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { Board, emptyBoard }                              from '@/app/definitions';
 
@@ -7,7 +7,7 @@ const SudokuContext = createContext<[Board,
   (value: (((prevState: (number | null)[][]) => (number | null)[][]) | (number | null)[][])) => void]>
 ([emptyBoard, () => {} ])
 
-const fetcher = url => fetch(url).then(r => r.json())
+const fetcher: Fetcher<Board, string> = (url) => fetch(url).then(r => r.json())
 
 const Cell = ({value, block, elementId} : {value: number, block: number, elementId: number}) => {
 
