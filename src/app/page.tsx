@@ -17,7 +17,7 @@ const Cell = ({value, block, elementId} : {value: number|null, block: number, el
     const v =  Number( event.target.value )
     if (isNaN(v) || v > 9) return ;
     const newBoard = board.map( (block) => [...block])
-    newBoard[block][elementId] = v
+    newBoard[block][elementId] = (v === 0) ? null : v
     setBoard(newBoard)
   }
 
@@ -32,7 +32,11 @@ const Cell = ({value, block, elementId} : {value: number|null, block: number, el
     <input
       className="bg-transparent cursor-pointer caret-transparent focus:bg-teal-100 outline-none border border-teal-900/10 text-center w-20 h-20 text-5xl disabled:cursor-not-allowed"
       type="number"
-      value={value?? board[block][elementId]?? undefined}
+      value={value?? board[block][elementId]?? ''}
+      minLength={1}
+      maxLength={1}
+      min={1}
+      max={9}
       disabled={!!value}
       onChange={saveValue}
       onKeyPress={sanitizeInput}
@@ -149,6 +153,7 @@ export default function Home() {
   }
 
   const resetBoard = () => {
+    console.log('Resetting Board...');
     setBoard(data)
     setIsSolved(false)
     setIsError(false)
@@ -159,7 +164,7 @@ export default function Home() {
 
     <main className="min-h-screen flex flex-col space-y-10 items-center justify-center bg-slate-200">
       <div className="flex flex-col space-y-5 w-full items-center">
-        <div className="flex justify-evenly">
+        <div className="flex justify-evenly w-full">
           <button
             onClick={resetBoard}
             className="border border-teal-900/50 p-4 rounded-2xl hover:bg-teal-900/50 hover:text-white ">
