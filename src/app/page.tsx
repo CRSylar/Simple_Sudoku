@@ -14,9 +14,10 @@ const Cell = ({value, block, elementId} : {value: number|null, block: number, el
   const [board, setBoard] = useContext(SudokuContext)
 
   const saveValue = (event: ChangeEvent<HTMLInputElement>) => {
-    if (isNaN( Number( event.target.value )) || event.target.value > 9) return ;
+    const v =  Number( event.target.value )
+    if (isNaN(v) || v > 9) return ;
     const newBoard = board.map( (block) => [...block])
-    newBoard[block][elementId] = parseInt(event.target.value)
+    newBoard[block][elementId] = v
     setBoard(newBoard)
   }
 
