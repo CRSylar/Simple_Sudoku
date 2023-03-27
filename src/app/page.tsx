@@ -149,17 +149,29 @@ export default function Home() {
     setIsChecking(false)
   }
 
+  const resetBoard = () => {
+    setBoard(data)
+    setIsSolved(false)
+    setIsError(false)
+  }
 
   return (
     <SudokuContext.Provider value={[board, setBoard]}>
 
     <main className="min-h-screen flex flex-col space-y-10 items-center justify-center bg-slate-200">
-      <div className="flex flex-col space-y-5">
-        <button
-          onClick={checkSudoku}
-          className="border border-teal-900/50 p-4 rounded-2xl hover:bg-teal-900/50 hover:text-white ">
-          {'Check Solution'}
-        </button>
+      <div className="flex flex-col space-y-5 w-full">
+        <div className="flex justify-evenly">
+          <button
+            onClick={resetBoard}
+            className="border border-teal-900/50 p-4 rounded-2xl hover:bg-teal-900/50 hover:text-white ">
+            {'Reset Board'}
+          </button>
+          <button
+            onClick={checkSudoku}
+            className="border border-teal-900/50 p-4 rounded-2xl hover:bg-teal-900/50 hover:text-white ">
+            {'Check Solution'}
+          </button>
+        </div>
         {/* Message from check solution */}
         {
           isChecking && <span className="text-lg text-yellow-600">{'Checking Board...'}</span>
