@@ -32,8 +32,6 @@ const Cell = ({value, block, elementId} : {value: number|null, block: number, el
     <input
       className="bg-transparent cursor-pointer caret-transparent focus:bg-teal-100 outline-none border border-teal-900/10 text-center w-20 h-20 text-5xl disabled:cursor-not-allowed"
       type="number"
-      minLength="1"
-      maxLength="1"
       value={value?? board[block][elementId] ?? ""}
       disabled={!!value}
       onChange={saveValue}
