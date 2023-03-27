@@ -9,7 +9,7 @@ const SudokuContext = createContext<[Board,
 
 const fetcher: Fetcher<Board, string> = (url) => fetch(url).then(r => r.json())
 
-const Cell = ({value, block, elementId} : {value: number, block: number, elementId: number}) => {
+const Cell = ({value, block, elementId} : {value: number|null, block: number, elementId: number}) => {
 
   const [board, setBoard] = useContext(SudokuContext)
 
@@ -42,7 +42,7 @@ const Cell = ({value, block, elementId} : {value: number, block: number, element
 }
 
 
-const Block = ({value, idx} : {value: number[], idx: number}) => {
+const Block = ({value, idx} : {value: (number|null)[], idx: number}) => {
 
   return (
     <div className="grid grid-cols-3 border border-teal-900/20">
