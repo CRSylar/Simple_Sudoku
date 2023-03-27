@@ -1,7 +1,7 @@
 "use client";
-import useSWR, { Fetcher }                                from 'swr';
-import { createContext, useContext, useEffect, useState } from 'react';
-import { Board, emptyBoard }                              from '@/app/definitions';
+import useSWR, { Fetcher }                                                    from 'swr';
+import React, { ChangeEvent, createContext, useContext, useEffect, useState } from 'react';
+import { Board, emptyBoard }                                                  from '@/app/definitions';
 
 const SudokuContext = createContext<[Board,
   (value: (((prevState: (number | null)[][]) => (number | null)[][]) | (number | null)[][])) => void]>
@@ -13,14 +13,14 @@ const Cell = ({value, block, elementId} : {value: number|null, block: number, el
 
   const [board, setBoard] = useContext(SudokuContext)
 
-  const saveValue = (event) => {
-    if (isNaN(event.target.value) || event.target.value > 9) return ;
+  const saveValue = (event: ChangeEvent<HTMLInputElement>) => {
+    if (isNaN( Number( event.target.value )) || event.target.value > 9) return ;
     const newBoard = board.map( (block) => [...block])
     newBoard[block][elementId] = parseInt(event.target.value)
     setBoard(newBoard)
   }
 
-  const sanitizeInput = (value) => {
+  const sanitizeInput = (value : React.KeyboardEvent<HTMLInputElement>) => {
     const regEx = /^[1-9]$/
     if (!regEx.test(value.key)) {
       value.preventDefault()
