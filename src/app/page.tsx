@@ -61,8 +61,8 @@ export default function Home() {
   const [isChecking, setIsChecking] = useState(false)
   const [isError, setIsError] = useState(false)
   const [isSolved, setIsSolved] = useState(false)
-  const  {data} = useSWR('http://localhost:3000/starting.json', fetcher )
-  const  {data: solution} = useSWR('http://localhost:3000/solution.json', fetcher )
+  const  {data} = useSWR('/starting.json', fetcher )
+  const  {data: solution} = useSWR('/solution.json', fetcher )
 
 
   useEffect( () => {
